@@ -244,6 +244,7 @@ h2 {
 }
 .form-box .wpcf7-submit {
     height: 40px;
+    line-height: 45px;
 }
 .customization h2 {
     padding-bottom: 27px;
@@ -484,7 +485,7 @@ p {
 }
 .high-speed-content {
     padding-left: 0px;
-    padding-top: 25px;
+    padding-top: 130px;
 }
 .nobody p {
     max-width: 100%;
@@ -513,7 +514,9 @@ p {
 #who .progress_bar {
     margin: 93px 0px 0px;
 }
-
+.gallery-top {
+    height: 300px;
+}
 }
 
 

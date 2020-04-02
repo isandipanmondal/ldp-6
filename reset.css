@@ -1694,8 +1694,8 @@ gallery-page-start-here
 .free-service-video-overlay a span i{
 	font-size: 30px;
 	color: #fff;
-	margin-left: 9px;
-	margin-top: 17px;
+	    margin-left: 7px;
+    margin-top: 20px;
 }
 .free-service-video-overlay.high-speed-overlay a span i{
 	font-size: 40px;
@@ -2615,6 +2615,16 @@ gallery-page-start-here
     .swiper-slide {
       background-size: cover;
       background-position: center;
+      position: relative;
+    }
+    .swiper-slide .high-speed-overlay{
+       opacity: 0;
+       visibility: hidden;
+       transition: 0.5s;
+    }
+    .swiper-slide:hover .high-speed-overlay{
+    	opacity: 1;
+    	visibility: visible;
     }
     .gallery-top {
       height: 100%;

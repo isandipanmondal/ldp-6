@@ -176,27 +176,31 @@
 				
                 <div class="swiper-container gallery-top">
     <div class="swiper-wrapper">
-      <div class="swiper-slide" style="background-image:url(img/project/1.jpg)">
-      	<div class="free-service-video-overlay high-speed-overlay">
-								<a href="#" tabindex="0"><span><i class="fa fa-caret-right" aria-hidden="true"></i></span></a>
-							  </div>
+      <div class="swiper-slide">
+		<video src="small.mp4" mutes></video>
+		<div class="free-service-video-overlay high-speed-overlay">
+			<a href="javascript:void(0)" tabindex="0" class="firstPlay"><span><i class="fa fa-caret-right" aria-hidden="true"></i></span></a>
+		</div>
       </div>
-      <div class="swiper-slide" style="background-image:url(img/project/2.jpg)">
-      	<div class="free-service-video-overlay high-speed-overlay">
-								<a href="#" tabindex="0"><span><i class="fa fa-caret-right" aria-hidden="true"></i></span></a>
-							  </div>
+      <div class="swiper-slide">
+		  <video src="small1.mp4" mutes></video>
+		  <div class="free-service-video-overlay high-speed-overlay">
+			<a href="javascript:void(0)" tabindex="0" class="firstPlay"><span><i class="fa fa-caret-right" aria-hidden="true"></i></span></a>
+		  </div>
       </div>
-      <div class="swiper-slide" style="background-image:url(img/project/3.jpg)">
-      	<div class="free-service-video-overlay high-speed-overlay">
-								<a href="#" tabindex="0"><span><i class="fa fa-caret-right" aria-hidden="true"></i></span></a>
-							  </div>
+      <div class="swiper-slide">
+		<video src="small.mp4" mutes></video>
+		<div class="free-service-video-overlay high-speed-overlay">
+			<a href="javascript:void(0)" tabindex="0" class="firstPlay"><span><i class="fa fa-caret-right" aria-hidden="true"></i></span></a>
+		</div>
       </div>
-      <div class="swiper-slide" style="background-image:url(img/project/4.jpg)">
-      	<div class="free-service-video-overlay high-speed-overlay">
-								<a href="#" tabindex="0"><span><i class="fa fa-caret-right" aria-hidden="true"></i></span></a>
-							  </div>
-      </div>
-      
+      <div class="swiper-slide">
+		<video src="small1.mp4" mutes></video>
+		<div class="free-service-video-overlay high-speed-overlay">
+			<a href="javascript:void(0)" tabindex="0" class="firstPlay"><span><i class="fa fa-caret-right" aria-hidden="true"></i></span></a>
+		</div>
+	  </div>
+	  
      
     </div>
     <!-- Add Arrows -->
@@ -204,7 +208,7 @@
   </div>
   <div class="swiper-container gallery-thumbs show-arrwo">
     <div class="swiper-wrapper">
-      <div class="swiper-slide" style="background-image:url(img/project/1.jpg)"></div>
+      <div class="swiper-slide" style="background-image:url(img/project/2.jpg)"> </div>
       <div class="swiper-slide" style="background-image:url(img/project/2.jpg)"></div>
       <div class="swiper-slide" style="background-image:url(img/project/3.jpg)"></div>
       <div class="swiper-slide" style="background-image:url(img/project/4.jpg)"></div>
@@ -898,6 +902,8 @@
    
    <!-- project slider -->
 	<script>
+	var lastIndx=null;
+	var video=null;
 	var galleryThumbs = new Swiper('.gallery-thumbs', {
       spaceBetween: 10,
       slidesPerView: 3,
@@ -909,19 +915,48 @@
         prevEl: '.swiper-button-prev',
       },
     });
+	
     var galleryTop = new Swiper('.gallery-top', {
-      spaceBetween: 10,
+      loop: true,
+	  spaceBetween: 10,
       navigation: {
         nextEl: '.swiper-button-next',
         prevEl: '.swiper-button-prev',
       },
       thumbs: {
         swiper: galleryThumbs
-      }
+      },
     });
 
+	galleryTop.on('slideChange', function() { 
+		playfirstVideo();
+	});
 
+	function playfirstVideo(){
+		if(lastIndx!=null){
+			$("video")[lastIndx].removeEventListener("pause",videoplaypause);
+			$($("video")[lastIndx]).trigger('pause');
+		}
+		$($(".firstPlay")[galleryTop.activeIndex]).hide();
+		$($("video")[galleryTop.activeIndex]).trigger('play');
+		lastIndx = galleryTop.activeIndex;
+		$("video")[galleryTop.activeIndex].addEventListener("pause",videoplaypause);
+	}
+	
+	function videoplaypause(){
+		$("video")[lastIndx].removeEventListener("pause",videoplaypause);
+		$($(".firstPlay")[lastIndx]).show();
+		let ind = lastIndx+1;
+		if(ind<=3){
+			galleryTop.slideTo(ind);
+		}
+	}
 
+	$(".firstPlay").bind("click",function(){
+		$(this).hide();
+		playfirstVideo();
+	});
+	
 	</script>
 <!-- project slider end-->
 
